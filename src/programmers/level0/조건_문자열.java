@@ -1,4 +1,4 @@
-package programmers;
+package programmers.level0;
 
 public class 조건_문자열 {
 

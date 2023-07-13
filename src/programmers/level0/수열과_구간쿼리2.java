@@ -1,4 +1,4 @@
-package programmers;
+package programmers.level0;
 
 public class 수열과_구간쿼리2 {
 

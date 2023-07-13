@@ -1,4 +1,4 @@
-package programmers;
+package programmers.level0;
 
 public class 주사위_게임2 {
 	public int solution(int a, int b, int c) {
