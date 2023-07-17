@@ -73,7 +73,7 @@ public class 명예의_전당1 {
 				}
 
 				// 4개까지는 정렬없이 들어와짐 내부적으로만 유지를 하고 5번째 수가 들어오고 부터는 정렬해서 출력해줌
-				System.out.println(priorityQueue);
+				//System.out.println(priorityQueue);
 				answer[i] = priorityQueue.peek();
 			}
 			return answer;
