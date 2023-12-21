@@ -3,65 +3,55 @@ package baekJoon;
 import java.util.*;
 import java.io.*;
 
-public class BJ2667{
+public class BJ2667 {
 
-	static int dx[] = {0, 0, 1, -1};
-	static int dy[] = {1, -1, 0, 0};
-	static int[] apart = new int[25*25];
-	static int n;
-	static int apartNum = 0;
-	static boolean[][] visited = new boolean[25][25];
-	static int[][] map = new int[25][25];
+	static int[] dx = {-1, 1, 0, 0};
+	static int[] dy = {0, 0, 1, -1};
+	static int n, cnt;
+	static int[][] map;
 
 	public static void main(String[] args) throws IOException {
-
-		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-		n = Integer.parseInt(bf.readLine());
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		n = Integer.parseInt(br.readLine());
 
 		map = new int[n][n];
-		visited = new boolean[n][n];
-
 		for (int i = 0; i<n; i++) {
-			String input = bf.readLine();
+			String tmp = br.readLine();
 			for (int j = 0; j<n; j++) {
-				map[i][j] = input.charAt(j)-'0';
+				map[i][j] = tmp.charAt(j)-'0';
 			}
 		}
 
+		int count = 0;
+		ArrayList<Integer> al = new ArrayList<>();
 		for (int i = 0; i<n; i++) {
 			for (int j = 0; j<n; j++) {
-				if (map[i][j] == 1 && !visited[i][j]) {
-					apartNum++;
-					dfs(i, j);
+				if (map[i][j]==1) {
+					count++;
+					al.add(DFS(i, j));
+					cnt = 0;
 				}
 			}
 		}
 
-		Arrays.sort(apart);
-		System.out.println(apartNum);
-
-		for (int i = 0; i<apart.length; i++) {
-			if (apart[i] == 0) {
-			} else {
-				System.out.println(apart[i]);
-			}
+		Collections.sort(al);
+		System.out.println(count);
+		for (int num : al) {
+			System.out.println(num);
 		}
 	}
 
-	static void dfs(int x, int y) {
-		visited[x][y] = true;
-		apart[apartNum]++;
-
+	static int DFS(int x, int y) {
+		map[x][y] = 0;
+		cnt++;
 		for (int i = 0; i<4; i++) {
 			int nx = x + dx[i];
 			int ny = y + dy[i];
-
-			if (nx >= 0 && ny >= 0 && nx < n && ny < n) {
-				if (map[nx][ny] == 1 && !visited[nx][ny]) {
-					dfs(nx, ny);
-				}
-			}
+			if (nx<0 || ny<0 || nx>=n || ny>=n) continue;
+			if (map[nx][ny]==0) continue;
+			DFS(nx, ny);
 		}
+
+		return cnt;
 	}
 }
-
